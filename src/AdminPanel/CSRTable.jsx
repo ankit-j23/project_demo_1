@@ -100,7 +100,7 @@ const mockData = [
   },
 ];
 
-const CSRTable = () => {
+const CSRTable = ({ searchQuery }) => {
   const [data, setData] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
   const [openNotes, setOpenNotes] = useState(false);
@@ -116,6 +116,7 @@ const CSRTable = () => {
         console.error("Failed to fetch data", err);
       });
   }, []);
+
   const handleViewNotes = (note) => {
     setSelectedNote(note);
     setOpenNotes(true);
@@ -123,6 +124,12 @@ const CSRTable = () => {
   const toggleRow = (id) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
+
+
+  // replace this with data when doing api call bhaiya
+    const filteredData = mockData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     // <div className="csr-table-wrapper">
@@ -136,7 +143,7 @@ const CSRTable = () => {
         <div className="csr-header">Actions</div>
       </div>
 
-      {mockData.map((item, index) => (
+      {filteredData.map((item, index) => (
         <div key={item.id} className="csr-main-row">
           <div className="csr-row-wrapper">
             <div className="csr-row">

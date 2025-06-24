@@ -60,7 +60,7 @@
   position: relative;
 
   .icon-search {
-    font-size: clamp(12px, 2vw, 22px);
+    font-size: clamp(12px, 2vw, 20px);
     color: #929598;
     position: absolute;
     cursor: pointer;
@@ -70,7 +70,7 @@
     border: none;
     outline: none;
     background: transparent;
-    margin-left: 13%;
+    margin-left: 10%;
     font-size: clamp(11px, 1.3vw, 16px);
     font-weight: 400;
     width: 100%;
@@ -121,30 +121,12 @@
 .date-picker-input {
   width: 48% !important;
   height: 5vh !important;
-  
-  .ant-picker {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 8px !important;
-    background-color: #f1f5ff !important;
-    border: 1px solid #d9d9d9 !important;
-    
-    &:hover, &:focus {
-      border-color: #2e3192 !important;
-      box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
-    }
-  }
-  
-  .ant-picker-input > input {
-    font-size: clamp(12px, 1.5vw, 14px) !important;
-    font-weight: 450 !important;
-  }
 }
 
 .calendar-icon {
   color: #2e3192 !important;
-  width: 16px !important;
-  height: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .clear-btn {
@@ -295,24 +277,6 @@
   // DatePicker styles for tablet
   .date-picker-input-tab {
     width: 48% !important;
-    
-    .ant-picker {
-      width: 100% !important;
-      height: 5vh !important;
-      border-radius: 8px !important;
-      background-color: #f1f5ff !important;
-      border: 1px solid #d9d9d9 !important;
-      
-      &:hover, &:focus {
-        border-color: #2e3192 !important;
-        box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
-      }
-    }
-    
-    .ant-picker-input > input {
-      font-size: clamp(14px, 1.5vw, 16px) !important;
-      font-weight: 500 !important;
-    }
   }
   
   .calendar-icon-tab {
@@ -474,25 +438,6 @@
   // DatePicker styles for mobile
   .date-picker-input-mobile {
     width: 48% !important;
-    
-    .ant-picker {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 35px !important;
-      border-radius: 8px !important;
-      background-color: #f1f5ff !important;
-      border: 1px solid #d9d9d9 !important;
-      
-      &:hover, &:focus {
-        border-color: #2e3192 !important;
-        box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
-      }
-    }
-    
-    .ant-picker-input > input {
-      font-size: clamp(12px, 1.5vw, 14px) !important;
-      font-weight: 500 !important;
-    }
   }
   
   .calendar-icon-mobile {
@@ -519,29 +464,5 @@
     &:hover {
       background-color: #2e3192e6;
     }
-  }
-}
-
-// Global DatePicker overrides to ensure consistent styling
-:global {
-  .ant-picker-dropdown {
-    z-index: 1050 !important;
-  }
-  
-  .ant-picker-focused {
-    border-color: #2e3192 !important;
-    box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
-  }
-  
-  .ant-picker-cell-selected .ant-picker-cell-inner {
-    background-color: #2e3192 !important;
-  }
-  
-  .ant-picker-cell:hover .ant-picker-cell-inner {
-    background-color: rgba(46, 49, 146, 0.1) !important;
-  }
-  
-  .ant-picker-today-btn {
-    color: #2e3192 !important;
   }
 }

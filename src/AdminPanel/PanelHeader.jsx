@@ -2,7 +2,7 @@ import React from "react";
 import gbanklogo from "../assets/gbanklogo.png";
 import { FaSearch } from "react-icons/fa";
 import { DatePicker } from "antd";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays , Search } from "lucide-react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import "./PanelHeader.scss";
@@ -20,39 +20,20 @@ const names = [
   "Grace Yellow",
 ];
 
-function PanelHeader() {
+function PanelHeader({ searchQuery, setSearchQuery }) {
   // State for search query and results
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchedResults, setSearchedResults] = useState([]);
-  
-  // State for date pickers - using null for initial state like in Dashboard
+  // const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  // Function to handle search
   const handleSearch = () => {
-    if (searchQuery.trim() === "") {
-      console.log("Please enter a search query.");
-      return;
-    }
-    const searchedResults = names.filter((name) =>
-      name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    if (searchedResults.length > 0) {
-      console.log("Search results:", searchedResults);
-      setSearchedResults(searchedResults);
-    } else {
-      console.log("No results found for:", searchQuery);
-      setSearchedResults([]);
-    }
+    console.log("Searching for:", searchQuery);
   };
 
-  // Function to handle clear action
   const handleClear = () => {
     setSearchQuery("");
     setStartDate(null);
     setEndDate(null);
-    setSearchedResults([]);
   };
 
   // Disable end dates before start date
@@ -69,7 +50,8 @@ function PanelHeader() {
         <img src={gbanklogo} alt="GBank Logo" className="logo" />
         <div className="search-container">
           <div className="search-wrapper">
-            <FaSearch className="icon-search" onClick={() => handleSearch()} />
+            {/* <FaSearch className="icon-search" onClick={() => handleSearch()} /> */}
+              <Search className="icon-search" onClick={() => handleSearch()}/>
             <input
               className="search-input"
               type="text"
