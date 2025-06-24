@@ -15,14 +15,14 @@
 .header-1 {
   color: #2e3192;
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 100%;
 }
 .header-2 {
   margin-top: 8px;
   color: #929598;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 20px;
 }
 .horizontal-line {
@@ -89,7 +89,7 @@
       }
       .box-header-text-2 {
         font-size: clamp(28px, 2.5vw, 50px);
-        font-weight: 800;
+        font-weight: 650;
         color: #2e3192;
         line-height: clamp(36px, 3.5vw, 50px);
       }
@@ -100,7 +100,7 @@
       }
       .box-header-text-timer-1 {
         font-size: clamp(28px, 2.5vw, 50px);
-        font-weight: 800;
+        font-weight: 650;
         color: #2e3192;
         line-height: clamp(36px, 3.5vw, 50px);
       }
@@ -133,7 +133,7 @@
     color: #2e3192;
     border-color: 2px solid blue;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 100%;
   }
   .chart-header-right {
