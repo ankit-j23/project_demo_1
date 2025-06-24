@@ -126,29 +126,32 @@ const CSRTable = ({ searchQuery, startDate, endDate }) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
 
-  // replace this with data when doing api call bhaiya
-  const filteredData = mockData
-    .map((item) => {
-      // If no date filter is applied, return the whole item
-      if (!startDate || !endDate) return item;
+  // replace this with data when doing api call
+const filteredData = mockData
+  .map((item) => {
+    // Step 1: Filter application details based on date range
+    const filteredDetails = (!startDate || !endDate)
+      ? item.details
+      : item.details.filter((detail) => {
+          const appDate = new Date(detail.applicationDate);
+          return (
+            appDate >= new Date(startDate) &&
+            appDate <= new Date(endDate)
+          );
+        });
 
-      // Filter details based on date range
-      const filteredDetails = item.details.filter((detail) => {
-        const appDate = new Date(detail.applicationDate);
-        return appDate >= new Date(startDate) && appDate <= new Date(endDate);
-      });
+    return {
+      ...item,
+      details: filteredDetails,
+    };
+  })
+  // Step 2: Filter out CSRs with no matching applications (after date filtering)
+  .filter((item) => item.details.length > 0 || (!startDate && !endDate))
+  // Step 3: Filter by name search
+  .filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-      // Return updated item with filtered details
-      return {
-        ...item,
-        details: filteredDetails,
-      };
-    })
-    .filter((item) => {
-      // Only keep CSR if it has at least one matching application detail
-      if (!startDate || !endDate) return true;
-      return item.details.length > 0;
-    });
 
   return (
     // <div className="csr-table-wrapper">
