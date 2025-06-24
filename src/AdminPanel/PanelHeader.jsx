@@ -20,21 +20,28 @@ const names = [
   "Grace Yellow",
 ];
 
-function PanelHeader({ searchQuery, setSearchQuery }) {
+function PanelHeader({
+  searchQuery,
+  setSearchQuery,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}) {
   // State for search query and results
   // const [searchQuery, setSearchQuery] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  // const [startDate, setStartDate] = useState(null);
+  // const [endDate, setEndDate] = useState(null);
 
   const handleSearch = () => {
     console.log("Searching for:", searchQuery);
   };
 
-  const handleClear = () => {
-    setSearchQuery("");
-    setStartDate(null);
-    setEndDate(null);
-  };
+const handleClear = () => {
+  setSearchQuery("");
+  setStartDate(null);
+  setEndDate(null);
+};
 
   // Disable end dates before start date
   const disabledEndDate = (current) => {

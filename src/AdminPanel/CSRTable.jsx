@@ -4,6 +4,7 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import view_icon from "../assets/view_icon.png";
 import axios from "axios";
+
 const mockData = [
   {
     id: 1,
@@ -14,22 +15,22 @@ const mockData = [
     details: [
       {
         applicationId: "1143",
-        applicationDate: "07 - 05 - 2025",
+        applicationDate: "2025-05-07",
         notes: "Dummy note A",
       },
       {
         applicationId: "2001",
-        applicationDate: "07 - 01 - 2025",
+        applicationDate: "2025-07-01",
         notes: "Details for Sophia",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
     ],
@@ -43,27 +44,27 @@ const mockData = [
     details: [
       {
         applicationId: "2001",
-        applicationDate: "07 - 01 - 2025",
+        applicationDate: "2025-07-01",
         notes: "Details for Sophia",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
     ],
@@ -85,7 +86,7 @@ const mockData = [
     details: [
       {
         applicationId: "3044",
-        applicationDate: "07 - 03 - 2025",
+        applicationDate: "2025-07-03",
         notes: "Notes from Olivia’s case",
       },
     ],
@@ -100,7 +101,7 @@ const mockData = [
   },
 ];
 
-const CSRTable = ({ searchQuery }) => {
+const CSRTable = ({ searchQuery, startDate, endDate }) => {
   const [data, setData] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
   const [openNotes, setOpenNotes] = useState(false);
@@ -125,11 +126,29 @@ const CSRTable = ({ searchQuery }) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
 
-
   // replace this with data when doing api call bhaiya
-    const filteredData = mockData.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredData = mockData
+    .map((item) => {
+      // If no date filter is applied, return the whole item
+      if (!startDate || !endDate) return item;
+
+      // Filter details based on date range
+      const filteredDetails = item.details.filter((detail) => {
+        const appDate = new Date(detail.applicationDate);
+        return appDate >= new Date(startDate) && appDate <= new Date(endDate);
+      });
+
+      // Return updated item with filtered details
+      return {
+        ...item,
+        details: filteredDetails,
+      };
+    })
+    .filter((item) => {
+      // Only keep CSR if it has at least one matching application detail
+      if (!startDate || !endDate) return true;
+      return item.details.length > 0;
+    });
 
   return (
     // <div className="csr-table-wrapper">
