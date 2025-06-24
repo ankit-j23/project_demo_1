@@ -1,15 +1,9 @@
 import React from "react";
 import gbanklogo from "../assets/gbanklogo.png";
-import { FaSearch, FaCalendarAlt } from "react-icons/fa";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import dayjs from "dayjs";
+import { FaSearch } from "react-icons/fa";
+import { DatePicker } from "antd";
+import { CalendarDays } from "lucide-react";
 import { useState } from "react";
-import DateInput from "./DateInput";
-import { FaTimes } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 import "./PanelHeader.scss";
 
@@ -25,20 +19,15 @@ const names = [
   "Frank Blue",
   "Grace Yellow",
 ];
+
 function PanelHeader() {
   // State for search query and results
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedResults, setSearchedResults] = useState([]);
-  // State for date pickers
-  const now = new Date(Date.now()); // or just new Date()
-
-  const year = String(now.getFullYear()).slice(2); // last two digits
-  const month = String(now.getMonth() + 1).padStart(2, "0"); // month is 0-indexed
-  const day = String(now.getDate()).padStart(2, "0"); // day of the month
-
-  const formattedDate = `${month}/${day}/${year}`;
-  const [startDate, setStartDate] = useState(formattedDate);
-  const [endDate, setEndDate] = useState(formattedDate);
+  
+  // State for date pickers - using null for initial state like in Dashboard
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   // Function to handle search
   const handleSearch = () => {
@@ -63,7 +52,15 @@ function PanelHeader() {
     setSearchQuery("");
     setStartDate(null);
     setEndDate(null);
+    setSearchedResults([]);
   };
+
+  // Disable end dates before start date
+  const disabledEndDate = (current) => {
+    if (!startDate) return false;
+    return current && current < startDate.startOf('day');
+  };
+
   return (
     <div className="header-container">
       {/* Left side: logo, input, search button */}
@@ -77,7 +74,9 @@ function PanelHeader() {
               className="search-input"
               type="text"
               placeholder="Search by name"
+              value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
             />
           </div>
           <button className="search-btn" onClick={() => handleSearch()}>
@@ -90,15 +89,26 @@ function PanelHeader() {
       {/* for desktop view */}
       <div className="header-content-2 desktop-view">
         <div className="date-picker-container">
-          <DateInput
-            label="Start Date"
+          <DatePicker
+            className="date-picker-input"
+            placeholder="Start Date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(date) => {
+              setStartDate(date);
+              // Clear end date if it's before the new start date
+              if (endDate && date && endDate < date) {
+                setEndDate(null);
+              }
+            }}
+            suffixIcon={<CalendarDays className="calendar-icon" />}
           />
-          <DateInput
-            label="End Date"
+          <DatePicker
+            className="date-picker-input"
+            placeholder="End Date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(date) => setEndDate(date)}
+            disabledDate={disabledEndDate}
+            suffixIcon={<CalendarDays className="calendar-icon" />}
           />
         </div>
         <button className="clear-btn" onClick={() => handleClear()}>
@@ -111,7 +121,6 @@ function PanelHeader() {
       </div>
 
       {/* for tab view left side */}
-
       <div className="header-content-1-tab tab-view">
         <img src={gbanklogo} alt="GBank Logo" className="logo-tab" />
         <div className="search-container-tab">
@@ -124,7 +133,9 @@ function PanelHeader() {
               className="search-input-tab"
               type="text"
               placeholder="Search by name"
+              value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
             />
           </div>
           <button className="search-btn" onClick={() => handleSearch()}>
@@ -136,19 +147,31 @@ function PanelHeader() {
           <span className="username">John Smith</span>
         </div>
       </div>
+
       {/* for tab view right side*/}
       <div className="header-content-2-tab tab-view">
         <div className="date-clear-btn-container">
           <div className="date-picker-container-tab">
-            <DateInput
-              label="Start Date"
+            <DatePicker
+              className="date-picker-input-tab"
+              placeholder="Start Date"
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(date) => {
+                setStartDate(date);
+                // Clear end date if it's before the new start date
+                if (endDate && date && endDate < date) {
+                  setEndDate(null);
+                }
+              }}
+              suffixIcon={<CalendarDays className="calendar-icon-tab" />}
             />
-            <DateInput
-              label="End Date"
+            <DatePicker
+              className="date-picker-input-tab"
+              placeholder="End Date"
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(date) => setEndDate(date)}
+              disabledDate={disabledEndDate}
+              suffixIcon={<CalendarDays className="calendar-icon-tab" />}
             />
           </div>
         </div>
@@ -156,15 +179,16 @@ function PanelHeader() {
           Clear
         </button>
       </div>
+
       {/* for mobile view */}
       <div className="header-content-1-mobile mobile-view">
         <img src={gbanklogo} alt="GBank Logo" className="logo-mobile" />
-
         <div className="profile-mobile">
           <Avatar alt="John Smith" src="" className="avatar-mobile" />
           <span className="username">John Smith</span>
         </div>
       </div>
+
       <div className="search-container-mobile mobile-view">
         <div className="search-wrapper-mobile">
           <FaSearch
@@ -175,25 +199,39 @@ function PanelHeader() {
             className="search-input-mobile"
             type="text"
             placeholder="Search by name"
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
         </div>
         <button className="search-btn-mobile" onClick={() => handleSearch()}>
           Search
         </button>
       </div>
+
       <div className="header-content-2-mobile mobile-view">
         <div className="date-clear-btn-container-mobile">
           <div className="date-picker-container-mobile">
-            <DateInput
-              label="Start Date"
+            <DatePicker
+              className="date-picker-input-mobile"
+              placeholder="Start Date"
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(date) => {
+                setStartDate(date);
+                // Clear end date if it's before the new start date
+                if (endDate && date && endDate < date) {
+                  setEndDate(null);
+                }
+              }}
+              suffixIcon={<CalendarDays className="calendar-icon-mobile" />}
             />
-            <DateInput
-              label="End Date"
+            <DatePicker
+              className="date-picker-input-mobile"
+              placeholder="End Date"
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(date) => setEndDate(date)}
+              disabledDate={disabledEndDate}
+              suffixIcon={<CalendarDays className="calendar-icon-mobile" />}
             />
           </div>
         </div>

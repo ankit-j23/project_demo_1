@@ -1,18 +1,16 @@
 .header-container {
   width: 99%;
   height: 12vh;
-  // height: 25%;
   background-color: #ffffff;
   display: flex;
   align-items: center;
-  // gap: 100px;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 5px;
   padding: 0 20px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  // border: 2px solid red;
+  
   @media (max-width: 1023px) {
     .desktop-view {
       display: none;
@@ -21,9 +19,11 @@
       display: flex;
     }
   }
+  
   .tab-view {
     display: none;
   }
+  
   .mobile-view {
     display: none;
   }
@@ -34,19 +34,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // border: 2px solid red;
 }
+
 .logo {
   width: 22%;
   height: 20%;
 }
+
 .search-container {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
-  // border: 2px solid red;
 }
 
 .search-wrapper {
@@ -57,15 +57,15 @@
   background-color: #f1f5ff;
   padding: 8px 12px;
   border-radius: 8px;
-  // border: 2px solid red;
   position: relative;
 
   .icon-search {
-    font-size: clamp(12px, 2vw, 22px); /* 22px */
+    font-size: clamp(12px, 2vw, 22px);
     color: #929598;
-    // border: 2px solid blue;
     position: absolute;
+    cursor: pointer;
   }
+  
   .search-input {
     border: none;
     outline: none;
@@ -73,11 +73,14 @@
     margin-left: 13%;
     font-size: clamp(12px, 1.5vw, 18px);
     font-weight: 500;
-    :hover {
+    width: 100%;
+    
+    &:hover {
       border: gray;
     }
   }
 }
+
 .search-btn {
   width: 25%;
   height: 5vh;
@@ -90,9 +93,14 @@
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: clamp(14px, 1.5vw, 18px); /* 14px */
+  font-size: clamp(14px, 1.5vw, 18px);
   line-height: 1.25rem;
+  
+  &:hover {
+    background-color: #2e3192e6;
+  }
 }
+
 .header-content-2 {
   width: 48%;
   display: flex;
@@ -100,12 +108,43 @@
   align-items: center;
   gap: 20px;
 }
+
 .date-picker-container {
   width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 5px;
+}
+
+// DatePicker styles for desktop
+.date-picker-input {
+  width: 48% !important;
+  height: 5vh !important;
+  
+  .ant-picker {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px !important;
+    background-color: #f1f5ff !important;
+    border: 1px solid #d9d9d9 !important;
+    
+    &:hover, &:focus {
+      border-color: #2e3192 !important;
+      box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
+    }
+  }
+  
+  .ant-picker-input > input {
+    font-size: clamp(12px, 1.5vw, 16px) !important;
+    font-weight: 500 !important;
+  }
+}
+
+.calendar-icon {
+  color: #2e3192 !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 .clear-btn {
@@ -122,6 +161,10 @@
   font-size: clamp(14px, 1.5vw, 17px);
   font-weight: 700;
   line-height: 1.25rem;
+  
+  &:hover {
+    background-color: #2e3192e6;
+  }
 }
 
 .profile {
@@ -129,26 +172,17 @@
   align-items: center;
   gap: 8px;
 
-  .avatar {
-    // width: 30%;
-    // height: 30%;
-    // border-radius: 50%;
-    // object-fit: cover;
-  }
-
   .username {
     font-size: clamp(14px, 1.5vw, 18px);
     color: #333;
   }
 }
 
-// for tab view
-
+// Tab view styles
 @media (min-width: 600px) and (max-width: 1023px) {
   .header-container {
     width: 99%;
     height: 18vh;
-    // height: 25%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -156,48 +190,43 @@
     flex-wrap: wrap;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    // border: 2px solid red;
+    
     .tab-view {
       display: flex;
     }
+    
     .mobile-view {
       display: none;
     }
   }
+  
   .header-content-1-tab {
-    // margin-top: 1%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    // border: 2px solid black;
   }
+  
   .logo-tab {
     width: 14%;
     height: 71%;
-    // border: 2px solid red;
   }
+  
   .profile-tab {
     display: flex;
     align-items: center;
     gap: 8px;
-    // border: 2px solid blue;
     justify-content: flex-end;
     padding: 0px 10px;
-    // border: 2px solid blue;
     width: 18%;
-    .avatar-tab {
-      // width: 20%;
-      // height: 20%;
-      // border-radius: 50%;
-    }
-
+    
     .username {
       font-size: clamp(14px, 1.5vw, 18px);
       color: #333;
     }
   }
+  
   .search-container-tab {
     width: 45%;
     display: flex;
@@ -205,26 +234,24 @@
     justify-content: flex-end;
     flex: 1 1 50%;
     gap: 10px;
-    // border: 2px solid rgb(41, 172, 50);
   }
+  
   .search-wrapper-tab {
     width: 50%;
-    // height: 5vh;
     display: flex;
     align-items: center;
     background-color: #f1f5ff;
     padding: 8px 8px;
     border-radius: 8px;
-    // border: 2px solid red;
     position: relative;
-    // border: 2px solid pink;
 
     .icon-search-tab {
-      font-size: clamp(18px, 2vw, 28px); /* 22px */
+      font-size: clamp(18px, 2vw, 28px);
       color: #929598;
-      // border: 2px solid blue;
       position: absolute;
+      cursor: pointer;
     }
+    
     .search-input-tab {
       border: none;
       outline: none;
@@ -232,50 +259,66 @@
       margin-left: 13%;
       font-size: clamp(16px, 1.5vw, 18px);
       font-weight: 500;
-      :hover {
+      width: 100%;
+      
+      &:hover {
         border: gray;
       }
     }
   }
-  .search-btn-tab {
-    width: 25%;
-    padding: 2%;
-    background-color: #2e3192;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: clamp(16px, 1.5vw, 18px); /* 14px */
-    line-height: 1.25rem;
-  }
+  
   .header-content-2-tab {
     margin-top: 1.2%;
-    // padding: 1%;
     width: 99%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    // border: 1px solid yellow;
   }
 
   .date-clear-btn-container {
     flex: 1;
     width: 80%;
   }
+  
   .date-picker-container-tab {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 5px;
-    // border: 1px solid blue;
   }
+  
+  // DatePicker styles for tablet
+  .date-picker-input-tab {
+    width: 48% !important;
+    
+    .ant-picker {
+      width: 100% !important;
+      height: 5vh !important;
+      border-radius: 8px !important;
+      background-color: #f1f5ff !important;
+      border: 1px solid #d9d9d9 !important;
+      
+      &:hover, &:focus {
+        border-color: #2e3192 !important;
+        box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
+      }
+    }
+    
+    .ant-picker-input > input {
+      font-size: clamp(14px, 1.5vw, 16px) !important;
+      font-weight: 500 !important;
+    }
+  }
+  
+  .calendar-icon-tab {
+    color: #2e3192 !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
   .clear-btn {
     width: 18%;
     height: 5vh;
@@ -290,51 +333,18 @@
     font-size: clamp(14px, 1.5vw, 17px);
     font-weight: 700;
     line-height: 1.25rem;
-  }
-  .clear-icon {
-    font-size: clamp(18px, 1.5vw, 20px);
-    color: #929598;
-    transition: color 0.2s ease;
-    position: absolute;
-    left: 106%;
-    top: 32%;
-
-    // background-color: #d3d3de;
-  }
-  .clear-icon-wrapper {
-    cursor: pointer;
-
-    .clear-tooltip {
-      position: absolute;
-      bottom: 125%; // above the icon
-      background-color: #2e3192;
-      color: white;
-      font-size: 14px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      transform: translateY(5px);
-    }
-
-    &:hover .clear-icon {
-      color: #2e3192;
-    }
-
-    &:hover .clear-tooltip {
-      opacity: 1;
-      transform: translateY(0);
+    
+    &:hover {
+      background-color: #2e3192e6;
     }
   }
 }
 
+// Mobile view styles
 @media (max-width: 599px) {
   .header-container {
     width: 99%;
     height: 20vh;
-    // height: 25%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -345,45 +355,39 @@
     padding: 0 5px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    // border: 1px solid red;
+    
     .mobile-view {
       display: flex;
     }
   }
+  
   .header-content-1-mobile {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    // border: 1px solid black;
   }
+  
   .logo-mobile {
     width: 23%;
     height: 71%;
-    // border: 2px solid red;
   }
+  
   .profile-mobile {
     display: flex;
     align-items: center;
     gap: 8px;
-    // border: 2px solid blue;
     justify-content: flex-end;
     padding: 0px 10px;
-    // border: 2px solid blue;
     width: 18%;
-    .avatar-mobile {
-      // width: 55%;
-      // height: 55%;
-      // border-radius: 50%;
-      // object-fit: cover;
-    }
-
+    
     .username {
       font-size: clamp(14px, 1.5vw, 18px);
       color: #333;
     }
   }
+  
   .search-container-mobile {
     width: 100%;
     display: flex;
@@ -391,6 +395,7 @@
     gap: 10px;
     padding: 0;
   }
+  
   .search-wrapper-mobile {
     width: 79%;
     display: flex;
@@ -401,10 +406,12 @@
     position: relative;
 
     .icon-search-mobile {
-      font-size: clamp(14px, 2vw, 18px); /* 22px */
+      font-size: clamp(14px, 2vw, 18px);
       color: #929598;
       position: absolute;
+      cursor: pointer;
     }
+    
     .search-input-mobile {
       border: none;
       outline: none;
@@ -412,16 +419,17 @@
       margin-left: 13%;
       font-size: clamp(14px, 1.5vw, 18px);
       font-weight: 500;
-      :hover {
+      width: 100%;
+      
+      &:hover {
         border: gray;
       }
     }
   }
+  
   .search-btn-mobile {
     width: 20%;
     padding: 1%;
-    // height: 10%;
-    // height: 5vh;
     background-color: #2e3192;
     color: #ffffff;
     border: none;
@@ -431,38 +439,69 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: clamp(14px, 1.5vw, 16px); /* 14px */
+    font-size: clamp(14px, 1.5vw, 16px);
     line-height: 1.25rem;
+    
+    &:hover {
+      background-color: #2e3192e6;
+    }
   }
+  
   .header-content-2-mobile {
-    // margin-top: 1.3%;
-    // padding: 1%;
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    // flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 1%;
-    // border: 1px solid yellow;
   }
 
   .date-clear-btn-container-mobile {
     flex: 1;
     width: 80%;
   }
+  
   .date-picker-container-mobile {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 5px;
-    // border: 1px solid blue;
   }
+  
+  // DatePicker styles for mobile
+  .date-picker-input-mobile {
+    width: 48% !important;
+    
+    .ant-picker {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 35px !important;
+      border-radius: 8px !important;
+      background-color: #f1f5ff !important;
+      border: 1px solid #d9d9d9 !important;
+      
+      &:hover, &:focus {
+        border-color: #2e3192 !important;
+        box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
+      }
+    }
+    
+    .ant-picker-input > input {
+      font-size: clamp(12px, 1.5vw, 14px) !important;
+      font-weight: 500 !important;
+    }
+  }
+  
+  .calendar-icon-mobile {
+    color: #2e3192 !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
   .clear-btn-mobile {
     width: 20%;
     padding: 1%;
-    // height: 5vh;
     background-color: #2e3192;
     color: #ffffff;
     border: none;
@@ -474,5 +513,33 @@
     font-size: clamp(14px, 1.5vw, 16px);
     font-weight: 700;
     line-height: 1.25rem;
+    
+    &:hover {
+      background-color: #2e3192e6;
+    }
+  }
+}
+
+// Global DatePicker overrides to ensure consistent styling
+:global {
+  .ant-picker-dropdown {
+    z-index: 1050 !important;
+  }
+  
+  .ant-picker-focused {
+    border-color: #2e3192 !important;
+    box-shadow: 0 0 0 2px rgba(46, 49, 146, 0.1) !important;
+  }
+  
+  .ant-picker-cell-selected .ant-picker-cell-inner {
+    background-color: #2e3192 !important;
+  }
+  
+  .ant-picker-cell:hover .ant-picker-cell-inner {
+    background-color: rgba(46, 49, 146, 0.1) !important;
+  }
+  
+  .ant-picker-today-btn {
+    color: #2e3192 !important;
   }
 }
