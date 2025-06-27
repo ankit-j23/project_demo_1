@@ -7,14 +7,12 @@ import { useNavigate } from "react-router-dom";
 function AdminLogin() {
     const navigate = useNavigate()
     return (
-        <div className="admin-login-container">
+        <div className="admin-login-container" style={{backgroundImage: `url(${login_frame})`}}>
             {/* <img src={login_frame} alt="login_frame" /> */}
-            <div className="login-content">
+            <div className="login-content md:max-w-[440px]">
                 <div className="login-content-inside">
                     <img src={gbanklogo} alt="G Bank Logo" className="login-bank-logo" />
-                    <h4 className="login-header">
-                        CSR LOGIN <span className="login-span">Login to continue</span>
-                    </h4>
+                    <p className="text-black/50 font-semibold">Login to continue</p>
                     <button onClick={() => navigate('/csrdashboard')} className="signin-button" style={{ cursor: 'pointer' }}>
                         <img
                             src={microsoftLogo}
